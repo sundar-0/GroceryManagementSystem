@@ -7,6 +7,8 @@ const port=5000
 var userapi=require('./api/user')
 var productapi=require('./api/product')
 var categoryapi=require('./api/category')
+var pricingapi=require('./api/pricing')
+var userimageapi=require('./api/userimage')
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,6 +25,9 @@ app.use(function(req, res, next) {
 app.use('/api/user',userapi)
 app.use('/api/product',productapi)
 app.use('/api/category',categoryapi)
+app.use('/api/pricing',pricingapi)
+app.use('/api/userimage',userimageapi)
+
 app.listen(port,()=>{
     console.log(`server is running on ${port}`);
 })
