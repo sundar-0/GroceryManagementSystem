@@ -4,6 +4,7 @@ var dburl=process.env.MONGO_DB_URL
 mongoose.connect(dburl,{useNewUrlParser:true,useCreateIndex:true, useUnifiedTopology: true })
 var conn=mongoose.Collection;
 var productSchema=new mongoose.Schema({
+    _id:mongoose.Schema.Types.ObjectId,
     productname:{
         type:String,
         required:true,
@@ -13,9 +14,9 @@ var productSchema=new mongoose.Schema({
     },
     dateofmfg:{type:Date},
     dateofexpiry:{type:Date},
-    category:{
-        type:String,
-        required:true
+    category:{type:mongoose.Schema.Types.ObjectId,ref:'categories',required:true},
+    productstatus:{
+        type:String
     }
 })
 var productModel=mongoose.model('products',productSchema)

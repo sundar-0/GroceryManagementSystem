@@ -1,6 +1,14 @@
 var categoryModule=require('../../Modules/categoryModule')
+exports.fetchallCategory=function(req,res,next){
+    categoryModule.find({},function(err,data){
+		res.status(200).json({
+			'message':'success',
+			'result':data
+		})
+	})	
+}
 exports.fetchCategory=function(req,res,next){
-    categoryModule.find({category_status:'Active'},{_id:0,categoryname:1},function(err,data){
+    categoryModule.find({category_status:'Active'},{categoryname:1},function(err,data){
 		res.status(200).json({
 			'message':'success',
 			'result':data
@@ -35,5 +43,16 @@ exports.deleteCategory=function(req,res,next){
         })
 }
 exports.updateCategory=function(req,res,next){
-
+    id=req.body._id,
+    categoryname=req.body.categoryname,
+    category_status=req.body.category_status
+    if(categoryname!==''&&category_status!=='')
+    categoryModule.findOneAndUpdate({_id:id},{$set:{categoryname:categoryname,category_status:category_status}})
+        .then(data=>{
+            res.json({
+                'message':'Category Updated Successfully',
+                'result':data
+            })
+        })
+    
 }

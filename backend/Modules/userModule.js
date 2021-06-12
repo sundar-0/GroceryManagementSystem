@@ -23,9 +23,13 @@ var userSchema=new mongoose.Schema({
         type:String,
         required:true
     },
-    date:{
+    date_joined:{
         type:Date,
         default:Date.now
+    },
+    status:{
+        type:String,
+        required:true
     }
 })
 var userModel=mongoose.model('users',userSchema)
